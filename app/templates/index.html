@@ -1,15 +1,77 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homepage</title>
+    <title>Dashboard de Gastos e Ganhos</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body>
-    <h1>Hello, World!</h1>
+<body class="bg-slate-950 text-white">
+
+    <nav class="bg-slate-900 p-4 text-center text-xl">
+        Dashboard
+    </nav>
+
+    <div class="container mx-auto p-6">
+
+        <div class="text-center mb-6">
+            <h1 class="text-3xl font-bold">Registros de Gastos e Ganhos</h1>
+        </div>
+
+        <div class="flex justify-between space-x-6">
+
+            <div class="w-full bg-slate-900 p-6 rounded-lg shadow-lg">
+                <h2 class="text-xl font-bold mb-4">Ganhos</h2>
+                <form method="POST" class="space-y-4">
+                    <input type="text" name="descricao" placeholder="Descrição"
+                        class="w-full p-2 rounded-lg bg-gray-700 text-white" required>
+                    <input type="number" name="valor" placeholder="Valor"
+                        class="w-full p-2 rounded-lg bg-gray-700 text-white" required>
+                    <input type="hidden" name="tipo" value="ganho">
+                    <button type="submit" class="w-full bg-green-600 p-2 rounded-lg hover:bg-green-500">Salvar
+                        Ganho</button>
+                </form>
+            </div>
+
+            <div class="w-full bg-slate-900 p-6 rounded-lg shadow-lg">
+                <h2 class="text-xl font-bold mb-4">Gastos</h2>
+                <form method="POST" class="space-y-4">
+                    <input type="text" name="descricao" placeholder="Descrição"
+                        class="w-full p-2 rounded-lg bg-gray-700 text-white" required>
+                    <input type="number" name="valor" placeholder="Valor"
+                        class="w-full p-2 rounded-lg bg-gray-700 text-white" required>
+                    <input type="hidden" name="tipo" value="gasto">
+                    <button type="submit" class="w-full bg-red-600 p-2 rounded-lg hover:bg-red-500">Salvar
+                        Gasto</button>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="mt-8">
+            <h2 class="text-2xl font-bold">Registros:</h2>
+            <div class="mt-4">
+                <h3 class="text-xl font-semibold">Ganhos</h3>
+                <ul class="list-disc pl-5">
+                    {% for ganho in registros.ganhos %}
+                    <li>{{ ganho.descricao }} - R$ {{ ganho.valor }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="mt-4">
+                <h3 class="text-xl font-semibold">Gastos</h3>
+                <ul class="list-disc pl-5">
+                    {% for gasto in registros.gastos %}
+                    <li>{{ gasto.descricao }} - R$ {{ gasto.valor }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
 </body>
 
 </html>
